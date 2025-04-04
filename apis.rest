@@ -1,0 +1,67 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWY4NWIxZTkxNzNlMjY1MTFjMTlkYyIsImlhdCI6MTc0Mzc1MDU4MCwiZXhwIjoxNzQzNzU0MTgwfQ.kct2pgQoUTLiOv8qFd4a8PXrytn62zcwkwBguyd5SGo
+@baseUrl = http://localhost:5000/api
+
+### Login user
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "securepassword"
+}
+
+### Register user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "securepassword",
+    "name": "New User"
+}
+
+### Create a parent category
+POST {{baseUrl}}/category
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Electronics"
+}
+
+### Create a subcategory
+POST {{baseUrl}}/category
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "smart phones",
+    "parent": "67ef85c2e9173e26511c19df"
+}
+
+### Update category
+PUT {{baseUrl}}/category/67ef85cce9173e26511c19e1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Phones"
+}
+
+### Create a subcategory
+POST {{baseUrl}}/category
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Smartphones",
+    "parent": "67ef85cce9173e26511c19e1"
+}
+
+### Get all categories (tree structure)
+GET {{baseUrl}}/category
+Authorization: Bearer {{token}}
+
+### Delete category
+DELETE {{baseUrl}}/category/67ef85cce9173e26511c19e1
+Authorization: Bearer {{token}}
